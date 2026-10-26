@@ -17,3 +17,14 @@ Fix it, in Python (`reconcile.py`) or JavaScript (`reconcile.js`), whichever you
 1. Fork this repo, fix the script, and commit your fix to your fork.
 2. Run it. Paste the code it prints into the form.
 3. Paste the link to your fork into the form.
+
+## The fix
+
+The data file was messy, and the old script didn't handle the mess. Four things were fixed in `reconcile.py`:
+
+1. **Broken lines:** a few lines in the file were garbled, and the script crashed on them. Now it skips them.
+2. **Missing ID:** a few payments had no ID. Now they're ignored.
+3. **Retries:** the same payment can be tried several times. The old script counted every success, so some payments were counted twice. Now it only looks at the last try for each payment. If that last try succeeded, it counts.
+4. **Numbers with commas:** some amounts looked like `"4,804.15"`, and the script couldn't read them as numbers. Now it removes the comma first.
+
+After that, the script counts 22,733 successful payments, which matches the finance team's hand count.
